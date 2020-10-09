@@ -10,6 +10,10 @@ public class BibleBookCollection
 	{
 		this.theBooks = new ArrayList<BibleBook>();
 	}
+	public ArrayList<BibleBook> getTheBooks()
+	{
+		return this.theBooks;
+	}
 	
 	public BibleBookCollection(String filename)
 	{
@@ -46,5 +50,54 @@ public class BibleBookCollection
 			}
 		}
 		throw new Exception("Term not found exception");
+	}
+	
+	public void display()
+	{
+		for(BibleBook s: this.theBooks)
+		{
+			s.display();
+		}
+		System.out.println("\n\n");
+	}
+	public ArrayList<BibleBook> sortOnName(ArrayList<BibleBook> stringList)
+	{
+		int counter = 0;
+		int lengthCounter = stringList.size();
+		while(counter < stringList.size())
+		{
+			for(int i = 0; i < lengthCounter - 1; i++)
+			{
+				if(stringList.get(i).getName().compareToIgnoreCase(stringList.get(i + 1).getName()) >= 0)
+				{
+					BibleBook storedString = stringList.get(i);
+					stringList.set(i, stringList.get(i + 1));
+					stringList.set(i + 1, storedString);
+				}
+			}
+			counter++;
+			lengthCounter--;
+		}
+		return stringList;
+	}
+	public ArrayList<BibleBook> sortOnChapterCount(ArrayList<BibleBook> stringList)
+	{
+		int counter = 0;
+		int lengthCounter = stringList.size();
+		while(counter < stringList.size())
+		{
+			for(int i = 0; i < lengthCounter - 1; i++)
+			{
+				if(stringList.get(i).getNumber_of_chapters() >= stringList.get(i + 1).getNumber_of_chapters())
+				{
+					BibleBook storedString = stringList.get(i);
+					stringList.set(i, stringList.get(i + 1));
+					stringList.set(i + 1, storedString);
+				}
+			}
+			counter++;
+			lengthCounter--;
+		}
+		return stringList;
 	}
 }
